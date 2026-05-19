@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eleanor Tolboe — Rising Star ⭐</title>
+  <meta name="description" content="Eleanor Tolboe — age 6, performer, skier, swimmer, guitarist in training. Starring as Zazou in The Lion King · May 21, 2026 · The Kids Theatre Company, Long Beach.">
+  <meta property="og:title" content="Eleanor Tolboe — Rising Star ⭐">
+  <meta property="og:description" content="Starring as Zazou in The Lion King · May 21, 2026 · The Kids Theatre Company, Long Beach CA">
+  <meta property="og:image" content="https://ctolbs.github.io/Eleanor/img/photo2.jpg">
+  <meta property="og:url" content="https://ctolbs.github.io/Eleanor/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Eleanor Tolboe — Rising Star ⭐">
+  <meta name="twitter:description" content="Starring as Zazou in The Lion King · May 21, 2026">
+  <meta name="twitter:image" content="https://ctolbs.github.io/Eleanor/img/photo2.jpg">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -86,7 +97,7 @@
     .ticker {
       display: inline-block;
       white-space: nowrap;
-      animation: ticker 22s linear infinite;
+      animation: ticker 40s linear infinite;
     }
     @keyframes ticker {
       from { transform: translateX(100vw); }
@@ -628,14 +639,9 @@
 
       <div class="card">
         <div class="card-icon">🎸</div>
-        <h2>Instruments</h2>
-        <ul>
-          <li>Guitar <span style="font-size:0.75rem;color:#ffdc32;font-weight:800;letter-spacing:1px;">LEARNING NOW!</span></li>
-          <li>Piano</li>
-          <li>Drums</li>
-          <li>Violin</li>
-          <li>Trumpet</li>
-        </ul>
+        <h2>Guitar</h2>
+        <p style="color:#ffdc32;font-weight:800;font-size:1rem;margin-bottom:8px;">LEARNING NOW!</p>
+        <p>Eleanor picked up the guitar and she is already rocking it. Watch out, world! 🤘</p>
       </div>
 
       <div class="card">
@@ -784,6 +790,21 @@
       </div>
     </div>
 
+    <!-- Share + Cheer -->
+    <div style="text-align:center;margin-bottom:36px;">
+      <p style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:6px;color:#ffdc32;margin-bottom:18px;">🌟 &nbsp; Cheer Eleanor On &nbsp; 🌟</p>
+      <p style="color:#888;font-size:0.95rem;margin-bottom:20px;line-height:1.7;">The show is May 21! Share Eleanor's page with family and friends — or send her some love.</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;">
+        <button id="share-btn" onclick="shareEleanor()" style="background:#ffdc32;color:#0a0a0a;font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:3px;padding:14px 32px;border-radius:999px;border:none;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 4px 20px rgba(255,220,50,0.4);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          📤 Share Eleanor's Page
+        </button>
+        <a href="https://tktcbuzz.square.site/tickets" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:transparent;color:#ffdc32;font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:3px;padding:14px 32px;border-radius:999px;border:2px solid #ffdc32;text-decoration:none;transition:background 0.2s,transform 0.15s;" onmouseover="this.style.background='rgba(255,220,50,0.1)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='transparent';this.style.transform='scale(1)'">
+          🎟 Get Show Tickets
+        </a>
+      </div>
+      <p id="share-confirm" style="color:#ffdc32;font-size:0.85rem;letter-spacing:2px;margin-top:12px;opacity:0;transition:opacity 0.3s;font-family:'Bebas Neue',cursive;">✓ LINK COPIED!</p>
+    </div>
+
     <!-- Footer -->
     <div class="mic-drop">
       <p>Made with <span>♥</span> by <span>Eleanor Tolboe</span></p>
@@ -793,6 +814,20 @@
   </div>
 
   <script>
+    function shareEleanor() {
+      const url = 'https://ctolbs.github.io/Eleanor/';
+      const text = '⭐ Eleanor Tolboe is starring as Zazou in The Lion King — May 21, 2026! Check out her page:';
+      if (navigator.share) {
+        navigator.share({ title: 'Eleanor Tolboe — Rising Star', text, url }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(url).then(() => {
+          const confirm = document.getElementById('share-confirm');
+          confirm.style.opacity = '1';
+          setTimeout(() => confirm.style.opacity = '0', 2500);
+        });
+      }
+    }
+
     // Countdown to May 21 2026 7:00 PM (showtime!)
     const showDate = new Date('2026-05-21T19:00:00');
 
