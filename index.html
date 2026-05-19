@@ -291,6 +291,62 @@
 
     .detail-pill strong { color: #ffdc32; }
 
+    /* ── Hover tile (replaces inline onmouseover) ── */
+    .hover-tile {
+      background: #111;
+      border: 2px solid #333;
+      border-radius: 16px;
+      padding: 18px 12px;
+      transition: border-color 0.2s, transform 0.15s;
+      cursor: default;
+    }
+    .hover-tile:hover { border-color: #ffdc32; transform: translateY(-4px); }
+    .hover-tile.pink  { border-color: #ff3366; box-shadow: 0 0 16px rgba(255,51,102,0.2); }
+    .hover-tile.pink:hover { border-color: #ff3366; }
+
+    .hover-family {
+      background: #111;
+      border-radius: 20px;
+      padding: 16px 28px;
+      transition: transform 0.15s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .hover-family:hover { transform: translateY(-4px); }
+
+    /* ── Lightbox ── */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      animation: fadeInOverlay 0.2s ease;
+    }
+    .lightbox-overlay.open { display: flex; }
+    .lightbox-overlay img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: 16px;
+      border: 2px solid #333;
+      box-shadow: 0 0 60px rgba(0,0,0,0.8);
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 20px; right: 24px;
+      font-size: 2rem;
+      color: #fff;
+      opacity: 0.7;
+      cursor: pointer;
+      z-index: 9999;
+      line-height: 1;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+
     /* ── Section cards ── */
     .cards {
       display: grid;
@@ -469,6 +525,12 @@
   </style>
 </head>
 <body>
+
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+    <img id="lightbox-img" src="" alt="Eleanor photo">
+  </div>
 
   <!-- Spotlight beams -->
   <div class="spotlights">
@@ -654,58 +716,27 @@
       <div class="card" style="grid-column:1/-1;background:linear-gradient(135deg,#0a0a14,#0f0a00,#0a0a14);border:2px solid #ff3366;box-shadow:0 0 40px rgba(255,51,102,0.2);border-radius:20px;padding:32px 28px;text-align:center;">
         <h2 style="font-family:'Bebas Neue',cursive;font-size:2rem;letter-spacing:3px;color:#ff3366;text-shadow:0 0 20px rgba(255,51,102,0.5);margin-bottom:22px;">✨ &nbsp; All About Eleanor &nbsp; ✨</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;max-width:700px;margin:0 auto;">
-          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
-            <div style="font-size:2.2rem;margin-bottom:8px;">🎭</div>
-            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Performing</div>
-            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">BORN FOR THE STAGE</div>
-          </div>
-          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
-            <div style="font-size:2.2rem;margin-bottom:8px;">⛺</div>
-            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Camping</div>
-            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">EXPLORER AT HEART</div>
-          </div>
-          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
-            <div style="font-size:2.2rem;margin-bottom:8px;">🧚</div>
-            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Fairy Gardens</div>
-            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">MAGICAL WORLDS</div>
-          </div>
-          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
-            <div style="font-size:2.2rem;margin-bottom:8px;">🏊</div>
-            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Swimming</div>
-            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">TOTAL FISH</div>
-          </div>
-          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
-            <div style="font-size:2.2rem;margin-bottom:8px;">🧗</div>
-            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Climbing</div>
-            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">GOES STRAIGHT UP</div>
-          </div>
-          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
-            <div style="font-size:2.2rem;margin-bottom:8px;">⛷️</div>
-            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Skiing</div>
-            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">SENDS IT DOWNHILL</div>
-          </div>
-          <div style="background:#111;border:2px solid #ff3366;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;box-shadow:0 0 16px rgba(255,51,102,0.2);" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-            <div style="font-size:2.2rem;margin-bottom:8px;">❤️</div>
-            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ff3366;">Mom &amp; Dad</div>
-            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">THE WHOLE WORLD</div>
-          </div>
-          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
-            <div style="font-size:2.2rem;margin-bottom:8px;">🎸</div>
-            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Guitar</div>
-            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">LEARNING NOW!</div>
-          </div>
+          <div class="hover-tile"><div style="font-size:2.2rem;margin-bottom:8px;">🎭</div><div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Performing</div><div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">BORN FOR THE STAGE</div></div>
+          <div class="hover-tile"><div style="font-size:2.2rem;margin-bottom:8px;">⛺</div><div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Camping</div><div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">EXPLORER AT HEART</div></div>
+          <div class="hover-tile"><div style="font-size:2.2rem;margin-bottom:8px;">🧚</div><div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Fairy Gardens</div><div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">MAGICAL WORLDS</div></div>
+          <div class="hover-tile"><div style="font-size:2.2rem;margin-bottom:8px;">🏊</div><div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Swimming</div><div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">TOTAL FISH</div></div>
+          <div class="hover-tile"><div style="font-size:2.2rem;margin-bottom:8px;">🧗</div><div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Climbing</div><div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">GOES STRAIGHT UP</div></div>
+          <div class="hover-tile"><div style="font-size:2.2rem;margin-bottom:8px;">⛷️</div><div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Skiing</div><div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">SENDS IT DOWNHILL</div></div>
+          <div class="hover-tile pink"><div style="font-size:2.2rem;margin-bottom:8px;">❤️</div><div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ff3366;">Mom &amp; Dad</div><div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">THE WHOLE WORLD</div></div>
+          <div class="hover-tile"><div style="font-size:2.2rem;margin-bottom:8px;">🎸</div><div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Guitar</div><div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">LEARNING NOW!</div></div>
         </div>
         <p style="margin-top:22px;font-family:'Bebas Neue',cursive;font-size:1.1rem;letter-spacing:4px;color:#555;">Age 6 &nbsp;·&nbsp; Long Beach, CA &nbsp;·&nbsp; Rising Star</p>
       </div>
 
       <div class="card">
         <div class="card-icon">🌟</div>
-        <h2>Fun Star Facts</h2>
+        <h2>Eleanor Facts</h2>
         <ul>
-          <li>Music changes your mood</li>
-          <li>There are 7 musical notes</li>
-          <li>Singing is exercise</li>
-          <li>Every culture has music</li>
+          <li>Age 6 &amp; already a star</li>
+          <li>Long Beach born &amp; raised</li>
+          <li>Brave · Mischievous · Courteous</li>
+          <li>Skis blue runs like a boss</li>
+          <li>First guitar chord: in progress!</li>
         </ul>
       </div>
 
@@ -767,22 +798,22 @@
     <div style="text-align:center;margin-bottom:28px;">
       <p style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:6px;color:#ffdc32;margin-bottom:18px;">❤️ &nbsp; My People &nbsp; ❤️</p>
       <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
-        <div style="background:#111;border:2px solid #ff3366;border-radius:20px;padding:16px 28px;box-shadow:0 0 20px rgba(255,51,102,0.15);transition:transform 0.15s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 0 30px rgba(255,51,102,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 20px rgba(255,51,102,0.15)'">
+        <div class="hover-family" style="border:2px solid #ff3366;box-shadow:0 0 20px rgba(255,51,102,0.15);">
           <div style="font-size:1.6rem;margin-bottom:6px;">🏠</div>
           <div style="font-family:'Bebas Neue',cursive;font-size:1.2rem;letter-spacing:3px;color:#fff;">The Tolboes</div>
           <div style="font-size:0.72rem;font-weight:800;letter-spacing:2px;color:#ff3366;margin-top:3px;">HOME BASE</div>
         </div>
-        <div style="background:#111;border:2px solid #ffdc32;border-radius:20px;padding:16px 28px;box-shadow:0 0 20px rgba(255,220,50,0.15);transition:transform 0.15s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 0 30px rgba(255,220,50,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 20px rgba(255,220,50,0.15)'">
+        <div class="hover-family" style="border:2px solid #ffdc32;box-shadow:0 0 20px rgba(255,220,50,0.15);">
           <div style="font-size:1.6rem;margin-bottom:6px;">⭐</div>
           <div style="font-family:'Bebas Neue',cursive;font-size:1.2rem;letter-spacing:3px;color:#fff;">The Harris</div>
           <div style="font-size:0.72rem;font-weight:800;letter-spacing:2px;color:#ffdc32;margin-top:3px;">FAMILY LOVE</div>
         </div>
-        <div style="background:#111;border:2px solid #00cfff;border-radius:20px;padding:16px 28px;box-shadow:0 0 20px rgba(0,207,255,0.15);transition:transform 0.15s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 0 30px rgba(0,207,255,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 20px rgba(0,207,255,0.15)'">
+        <div class="hover-family" style="border:2px solid #00cfff;box-shadow:0 0 20px rgba(0,207,255,0.15);">
           <div style="font-size:1.6rem;margin-bottom:6px;">💙</div>
           <div style="font-family:'Bebas Neue',cursive;font-size:1.2rem;letter-spacing:3px;color:#fff;">The Neumans</div>
           <div style="font-size:0.72rem;font-weight:800;letter-spacing:2px;color:#00cfff;margin-top:3px;">FAMILY LOVE</div>
         </div>
-        <div style="background:#111;border:2px solid #00d4aa;border-radius:20px;padding:16px 28px;box-shadow:0 0 20px rgba(0,212,170,0.15);transition:transform 0.15s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 0 30px rgba(0,212,170,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 20px rgba(0,212,170,0.15)'">
+        <div class="hover-family" style="border:2px solid #00d4aa;box-shadow:0 0 20px rgba(0,212,170,0.15);">
           <div style="font-size:1.6rem;margin-bottom:6px;">🌿</div>
           <div style="font-family:'Bebas Neue',cursive;font-size:1.2rem;letter-spacing:3px;color:#fff;">The Stewarts</div>
           <div style="font-size:0.72rem;font-weight:800;letter-spacing:2px;color:#00d4aa;margin-top:3px;">FAMILY LOVE</div>
@@ -833,11 +864,14 @@
 
     function pad(n) { return String(n).padStart(2, '0'); }
 
+    let countdownTimer;
+
     function updateCountdown() {
       const now = new Date();
       const diff = showDate - now;
 
       if (diff <= 0) {
+        clearInterval(countdownTimer);
         document.querySelector('.countdown-wrap').innerHTML =
           '<div class="countdown-label" style="font-size:1.6rem;color:#ff3366;text-shadow:0 0 30px rgba(255,51,102,0.8);">🎉 SHOWTIME! BREAK A LEG ELEANOR! 🎉</div>';
         return;
@@ -855,7 +889,7 @@
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+    countdownTimer = setInterval(updateCountdown, 1000);
 
     // ── Easter egg: type K-Y-L-E ──────────────────────────────────────────
     (function() {
@@ -911,22 +945,38 @@
       });
     })();
 
-    // Photo gallery — add filenames to this list as photos arrive
+    // Lightbox
+    function openLightbox(src, alt) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-img').alt = alt;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Photo gallery
     const photos = [
-      'img/photo1.jpg',
-      'img/photo2.jpg',
-      'img/photo3.jpg',
-      'img/photo4.jpg',
-      'img/photo5.jpg',
+      { src: 'img/photo1.jpg', alt: 'Eleanor and her sister at a restaurant' },
+      { src: 'img/photo2.jpg', alt: 'Eleanor with bird face paint' },
+      { src: 'img/photo3.jpg', alt: 'Mom applying Eleanor\'s face paint for the show' },
+      { src: 'img/photo4.jpg', alt: 'Eleanor skiing in pink gear with dad' },
+      { src: 'img/photo5.jpg', alt: 'Eleanor in costume with castmate after a show' },
     ];
     const gallery = document.getElementById('photo-gallery');
     if (photos.length) {
-      photos.forEach(src => {
+      photos.forEach(({ src, alt }) => {
         const img = document.createElement('img');
         img.src = src;
+        img.alt = alt;
         img.style.cssText = 'width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px;border:2px solid #333;transition:transform 0.2s,border-color 0.2s;cursor:pointer;';
         img.onmouseover = () => { img.style.transform='scale(1.04)'; img.style.borderColor='#ffdc32'; };
         img.onmouseout  = () => { img.style.transform='scale(1)';    img.style.borderColor='#333'; };
+        img.onclick = () => openLightbox(src, alt);
         gallery.appendChild(img);
       });
     } else {
