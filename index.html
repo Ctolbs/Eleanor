@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eleanor Tolboe — Rising Star ⭐</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0a;
+      font-family: 'Nunito', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #fff;
+    }
+
+    /* ── Spotlight beams ── */
+    .spotlights {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .beam {
+      position: absolute;
+      top: -60px;
+      width: 180px;
+      height: 110vh;
+      background: linear-gradient(180deg, rgba(255,220,50,0.18) 0%, transparent 100%);
+      transform-origin: top center;
+      border-radius: 0 0 999px 999px;
+      animation: swingBeam ease-in-out infinite alternate;
+    }
+
+    .beam:nth-child(1) { left: 10%;  animation-duration: 7s;  animation-delay: 0s;   transform: rotate(-18deg); }
+    .beam:nth-child(2) { left: 30%;  animation-duration: 9s;  animation-delay: 1s;   transform: rotate(-6deg);  background: linear-gradient(180deg,rgba(255,80,120,0.13) 0%,transparent 100%); }
+    .beam:nth-child(3) { left: 55%;  animation-duration: 8s;  animation-delay: 2s;   transform: rotate(6deg);   background: linear-gradient(180deg,rgba(100,180,255,0.13) 0%,transparent 100%); }
+    .beam:nth-child(4) { left: 75%;  animation-duration: 10s; animation-delay: 0.5s; transform: rotate(18deg);  background: linear-gradient(180deg,rgba(255,220,50,0.15) 0%,transparent 100%); }
+
+    @keyframes swingBeam {
+      from { transform: rotate(var(--r, -18deg)) scaleX(1); }
+      to   { transform: rotate(calc(var(--r, -18deg) + 12deg)) scaleX(1.1); }
+    }
+
+    /* ── Confetti ── */
+    .confetti-piece {
+      position: fixed;
+      width: 10px; height: 10px;
+      border-radius: 2px;
+      animation: confettiFall linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes confettiFall {
+      0%   { transform: translateY(-20px) rotate(0deg);   opacity: 1; }
+      100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ── Page ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 36px 20px 60px;
+    }
+
+    /* ── Top ticker ── */
+    .ticker-wrap {
+      overflow: hidden;
+      background: #ffdc32;
+      color: #0a0a0a;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      padding: 7px 0;
+      margin-bottom: 30px;
+      border-radius: 6px;
+    }
+    .ticker {
+      display: inline-block;
+      white-space: nowrap;
+      animation: ticker 22s linear infinite;
+    }
+    @keyframes ticker {
+      from { transform: translateX(100vw); }
+      to   { transform: translateX(-100%); }
+    }
+
+    /* ── Hero name ── */
+    .hero {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .star-label {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1rem;
+      letter-spacing: 6px;
+      color: #ffdc32;
+      margin-bottom: 8px;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(3.5rem, 12vw, 8rem);
+      line-height: 0.95;
+      color: #fff;
+      text-shadow:
+        0 0 40px rgba(255,220,50,0.6),
+        0 0 80px rgba(255,220,50,0.3),
+        4px 4px 0 #b8860b;
+      letter-spacing: 4px;
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      color: #aaa;
+      letter-spacing: 3px;
+      margin-top: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* ── Countdown ── */
+    .countdown-wrap {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .countdown-label {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1rem;
+      letter-spacing: 6px;
+      color: #ffdc32;
+      margin-bottom: 14px;
+    }
+
+    .countdown-digits {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cd-block {
+      background: #111;
+      border: 2px solid #ffdc32;
+      border-radius: 16px;
+      padding: 16px 20px 10px;
+      min-width: 80px;
+      box-shadow: 0 0 20px rgba(255,220,50,0.2);
+    }
+
+    .cd-num {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 3.2rem;
+      line-height: 1;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255,220,50,0.7);
+      display: block;
+    }
+
+    .cd-unit {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #ffdc32;
+      text-transform: uppercase;
+      margin-top: 6px;
+      display: block;
+    }
+
+    .cd-sep {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 3rem;
+      color: #ffdc32;
+      align-self: center;
+      margin-top: -10px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    /* ── Show date card (HERO) ── */
+    .showtime {
+      background: linear-gradient(135deg, #1a0a00, #3d1f00, #1a0a00);
+      border: 3px solid #ffdc32;
+      border-radius: 24px;
+      padding: 32px 28px;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(255,220,50,0.35), 0 8px 0 #5a3e00;
+      margin-bottom: 28px;
+      animation: showGlow 2.5s ease-in-out infinite alternate;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .showtime::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: conic-gradient(transparent 0deg, rgba(255,220,50,0.06) 60deg, transparent 120deg);
+      animation: rotateBg 8s linear infinite;
+    }
+
+    @keyframes rotateBg {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    @keyframes showGlow {
+      from { box-shadow: 0 0 40px rgba(255,220,50,0.3), 0 8px 0 #5a3e00; }
+      to   { box-shadow: 0 0 80px rgba(255,220,50,0.6), 0 8px 0 #5a3e00; }
+    }
+
+    .showtime-eyebrow {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1rem;
+      letter-spacing: 5px;
+      color: #ffdc32;
+      margin-bottom: 6px;
+      position: relative;
+    }
+
+    .showtime-icon { font-size: 3rem; display: block; margin-bottom: 8px; position: relative; animation: iconBounce 1.4s ease-in-out infinite alternate; }
+
+    @keyframes iconBounce {
+      from { transform: scale(1) rotate(-3deg); }
+      to   { transform: scale(1.15) rotate(3deg); }
+    }
+
+    .showtime-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      color: #fff;
+      text-shadow: 0 0 30px rgba(255,220,50,0.8), 2px 2px 0 #b8860b;
+      letter-spacing: 3px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .showtime-role {
+      font-size: 1.1rem;
+      color: #ffdc32;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .showtime-details {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .detail-pill {
+      background: rgba(255,220,50,0.15);
+      border: 2px solid #ffdc32;
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    .detail-pill strong { color: #ffdc32; }
+
+    /* ── Section cards ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .card {
+      background: #111;
+      border: 2px solid #333;
+      border-radius: 20px;
+      padding: 26px 22px;
+      text-align: center;
+      transition: transform 0.15s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #ffdc32;
+      box-shadow: 0 0 24px rgba(255,220,50,0.25);
+    }
+
+    .card-icon { font-size: 2.6rem; margin-bottom: 10px; }
+
+    .card h2 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      color: #ffdc32;
+      margin-bottom: 10px;
+    }
+
+    .card p, .card ul {
+      color: #bbb;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .card ul { list-style: none; padding: 0; }
+    .card ul li::before { content: "★ "; color: #ffdc32; }
+
+    /* ── Playlist ── */
+    .playlist-section {
+      margin-bottom: 28px;
+    }
+
+    .playlist-label {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1rem;
+      letter-spacing: 6px;
+      color: #ffdc32;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .playlist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .playlist-track {
+      background: #111;
+      border: 2px solid #222;
+      border-radius: 16px;
+      padding: 18px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .playlist-track:hover {
+      border-color: #ffdc32;
+      transform: translateY(-4px);
+      box-shadow: 0 0 20px rgba(255,220,50,0.2);
+    }
+
+    .track-art {
+      font-size: 2rem;
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: #1a1a1a;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .track-info { overflow: hidden; }
+
+    .track-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.05rem;
+      letter-spacing: 2px;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track-artist {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #555;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .track-play {
+      margin-left: auto;
+      flex-shrink: 0;
+      font-size: 1.2rem;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+
+    .playlist-track:hover .track-play { opacity: 1; }
+
+    /* ── Faves full-width ── */
+    .faves-card {
+      grid-column: 1 / -1;
+      background: #0a0a0a;
+      border: 2px solid #ff3366;
+      border-radius: 20px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255,51,102,0.15);
+    }
+
+    .faves-card h2 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2rem;
+      letter-spacing: 3px;
+      color: #ff3366;
+      margin-bottom: 18px;
+      text-shadow: 0 0 20px rgba(255,51,102,0.5);
+    }
+
+    .fave-pill {
+      display: inline-block;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 2px solid #ff3366;
+      color: #fff;
+      background: rgba(255,51,102,0.15);
+      margin: 6px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .fave-pill:hover {
+      background: rgba(255,51,102,0.4);
+      transform: scale(1.08);
+    }
+
+    /* ── Mic drop footer ── */
+    .mic-drop {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid #222;
+    }
+
+    .mic-drop p {
+      color: #555;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+    }
+
+    .mic-drop span { color: #ffdc32; font-family: 'Bebas Neue', cursive; letter-spacing: 3px; }
+  </style>
+</head>
+<body>
+
+  <!-- Spotlight beams -->
+  <div class="spotlights">
+    <div class="beam"></div>
+    <div class="beam"></div>
+    <div class="beam"></div>
+    <div class="beam"></div>
+  </div>
+
+  <div class="page">
+
+    <!-- Ticker -->
+    <div class="ticker-wrap">
+      <div class="ticker">
+        &nbsp; ★ ELEANOR TOLBOE &nbsp;·&nbsp; THE LION KING &nbsp;·&nbsp; AS ZAZOU &nbsp;·&nbsp; MAY 21, 2026 &nbsp;·&nbsp; THE KIDS THEATRE COMPANY · LONG BEACH &nbsp;·&nbsp; IMAGINE DRAGONS &nbsp;·&nbsp; MOANA &nbsp;·&nbsp; 🦜 RIO IS COMING! &nbsp;·&nbsp; ⛺ CAMPER &nbsp;·&nbsp; 🧚 FAIRY GARDENS &nbsp;·&nbsp; 🏊 SWIMMER &nbsp;·&nbsp; 🧗 CLIMBER &nbsp;·&nbsp; ⛷️ SKIER &nbsp;·&nbsp; 🎸 GUITARIST IN TRAINING &nbsp;·&nbsp; ★ ELEANOR TOLBOE &nbsp;·&nbsp;
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <p class="star-label">✦ &nbsp; THE STAGE IS YOURS &nbsp; ✦</p>
+      <h1 class="hero-name">Eleanor<br>Tolboe</h1>
+      <p class="hero-sub">Singer &nbsp;·&nbsp; Performer &nbsp;·&nbsp; Storyteller</p>
+      <p style="margin-top:14px;font-family:'Bebas Neue',cursive;font-size:1.4rem;letter-spacing:5px;color:#ffdc32;text-shadow:0 0 20px rgba(255,220,50,0.5);">Brave &nbsp;·&nbsp; Mischievous &nbsp;·&nbsp; Courteous</p>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-wrap">
+      <div class="countdown-label">🎭 &nbsp; Show Night Countdown &nbsp; 🎭</div>
+      <div class="countdown-digits">
+        <div class="cd-block">
+          <span class="cd-num" id="cd-days">--</span>
+          <span class="cd-unit">Days</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block">
+          <span class="cd-num" id="cd-hours">--</span>
+          <span class="cd-unit">Hours</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block">
+          <span class="cd-num" id="cd-mins">--</span>
+          <span class="cd-unit">Mins</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block">
+          <span class="cd-num" id="cd-secs">--</span>
+          <span class="cd-unit">Secs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHOWTIME card -->
+    <div class="showtime">
+      <p class="showtime-eyebrow">🎤 &nbsp; NEXT PERFORMANCE &nbsp; 🎤</p>
+      <span class="showtime-icon">🦁</span>
+      <h2 class="showtime-title">The Lion King</h2>
+      <p class="showtime-role">Eleanor stars as ZAZOU</p>
+      <div class="showtime-details">
+        <div class="detail-pill">📅 <strong>May 21, 2026</strong></div>
+        <div class="detail-pill">📍 <strong>The Kids Theatre Company · Long Beach</strong></div>
+      </div>
+      <a href="https://tktcbuzz.square.site/tickets" target="_blank" rel="noopener"
+         style="display:inline-block;margin-top:22px;background:#ffdc32;color:#0a0a0a;font-family:'Bebas Neue',cursive;font-size:1.1rem;letter-spacing:3px;padding:12px 32px;border-radius:999px;text-decoration:none;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 4px 20px rgba(255,220,50,0.4);"
+         onmouseover="this.style.transform='scale(1.05)';this.style.boxShadow='0 6px 30px rgba(255,220,50,0.6)'"
+         onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(255,220,50,0.4)'">
+        🎟 Get Tickets
+      </a>
+    </div>
+
+    <!-- LA vibe bar -->
+    <div style="display:flex;justify-content:center;gap:24px;margin-bottom:28px;flex-wrap:wrap;">
+      <span style="font-size:0.8rem;font-weight:800;letter-spacing:4px;color:#555;text-transform:uppercase;">Long Beach</span>
+      <span style="color:#333;">·</span>
+      <span style="font-size:0.8rem;font-weight:800;letter-spacing:4px;color:#ffdc32;text-transform:uppercase;">On Stage Now</span>
+      <span style="color:#333;">·</span>
+      <span style="font-size:0.8rem;font-weight:800;letter-spacing:4px;color:#555;text-transform:uppercase;">Los Angeles</span>
+    </div>
+
+    <!-- Photo Gallery -->
+    <div style="margin-bottom:28px;">
+      <p style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:6px;color:#ffdc32;text-align:center;margin-bottom:16px;">📸 &nbsp; Eleanor In Action &nbsp; 📸</p>
+      <div id="photo-gallery" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;"></div>
+    </div>
+
+    <!-- Playlist -->
+    <div class="playlist-section">
+      <p class="playlist-label">🎵 &nbsp; Eleanor's Playlist &nbsp; 🎵</p>
+      <div class="playlist-grid">
+
+        <a class="playlist-track" href="https://www.youtube.com/results?search_query=circle+of+life+lion+king" target="_blank" rel="noopener">
+          <div class="track-art">🦁</div>
+          <div class="track-info">
+            <div class="track-title">Circle of Life</div>
+            <div class="track-artist">THE LION KING</div>
+          </div>
+          <span class="track-play">▶</span>
+        </a>
+
+        <a class="playlist-track" href="https://www.youtube.com/results?search_query=imagine+dragons+thunder" target="_blank" rel="noopener" style="border-color:#00cfff33;">
+          <div class="track-art">⚡</div>
+          <div class="track-info">
+            <div class="track-title" style="color:#00cfff;">Thunder</div>
+            <div class="track-artist">IMAGINE DRAGONS</div>
+          </div>
+          <span class="track-play">▶</span>
+        </a>
+
+        <a class="playlist-track" href="https://www.youtube.com/results?search_query=imagine+dragons+believer" target="_blank" rel="noopener" style="border-color:#00cfff33;">
+          <div class="track-art">🥊</div>
+          <div class="track-info">
+            <div class="track-title" style="color:#00cfff;">Believer</div>
+            <div class="track-artist">IMAGINE DRAGONS</div>
+          </div>
+          <span class="track-play">▶</span>
+        </a>
+
+        <a class="playlist-track" href="https://www.youtube.com/results?search_query=moana+how+far+ill+go" target="_blank" rel="noopener" style="border-color:#00d4aa33;">
+          <div class="track-art">🌊</div>
+          <div class="track-info">
+            <div class="track-title" style="color:#00d4aa;">How Far I'll Go</div>
+            <div class="track-artist">MOANA</div>
+          </div>
+          <span class="track-play">▶</span>
+        </a>
+
+        <a class="playlist-track" href="https://www.youtube.com/results?search_query=moana+shiny+tamatoa" target="_blank" rel="noopener" style="border-color:#00d4aa33;">
+          <div class="track-art">✨</div>
+          <div class="track-info">
+            <div class="track-title" style="color:#00d4aa;">Shiny</div>
+            <div class="track-artist">MOANA</div>
+          </div>
+          <span class="track-play">▶</span>
+        </a>
+
+        <a class="playlist-track" href="https://www.youtube.com/results?search_query=rio+movie+real+in+rio" target="_blank" rel="noopener" style="border-color:#ffdc3233;">
+          <div class="track-art">🦜</div>
+          <div class="track-info">
+            <div class="track-title" style="color:#ffdc32;">Real in Rio</div>
+            <div class="track-artist">RIO</div>
+          </div>
+          <span class="track-play">▶</span>
+        </a>
+
+        <a class="playlist-track" href="https://www.youtube.com/results?search_query=metallica+nothing+else+matters" target="_blank" rel="noopener" style="border-color:#ff336633;">
+          <div class="track-art">🤘</div>
+          <div class="track-info">
+            <div class="track-title" style="color:#ff3366;">Nothing Else Matters</div>
+            <div class="track-artist">METALLICA</div>
+          </div>
+          <span class="track-play">▶</span>
+        </a>
+
+        <a class="playlist-track" href="https://www.youtube.com/results?search_query=a+tribe+called+quest+can+i+kick+it" target="_blank" rel="noopener" style="border-color:#ff336633;">
+          <div class="track-art">🎧</div>
+          <div class="track-info">
+            <div class="track-title" style="color:#ff3366;">Can I Kick It?</div>
+            <div class="track-artist">A TRIBE CALLED QUEST</div>
+          </div>
+          <span class="track-play">▶</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">🎸</div>
+        <h2>Instruments</h2>
+        <ul>
+          <li>Guitar <span style="font-size:0.75rem;color:#ffdc32;font-weight:800;letter-spacing:1px;">LEARNING NOW!</span></li>
+          <li>Piano</li>
+          <li>Drums</li>
+          <li>Violin</li>
+          <li>Trumpet</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎤</div>
+        <h2>Singing</h2>
+        <p>Singing turns your feelings into music. Every voice is special — even yours!</p>
+      </div>
+
+      <!-- All About Eleanor -->
+      <div class="card" style="grid-column:1/-1;background:linear-gradient(135deg,#0a0a14,#0f0a00,#0a0a14);border:2px solid #ff3366;box-shadow:0 0 40px rgba(255,51,102,0.2);border-radius:20px;padding:32px 28px;text-align:center;">
+        <h2 style="font-family:'Bebas Neue',cursive;font-size:2rem;letter-spacing:3px;color:#ff3366;text-shadow:0 0 20px rgba(255,51,102,0.5);margin-bottom:22px;">✨ &nbsp; All About Eleanor &nbsp; ✨</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;max-width:700px;margin:0 auto;">
+          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
+            <div style="font-size:2.2rem;margin-bottom:8px;">🎭</div>
+            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Performing</div>
+            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">BORN FOR THE STAGE</div>
+          </div>
+          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
+            <div style="font-size:2.2rem;margin-bottom:8px;">⛺</div>
+            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Camping</div>
+            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">EXPLORER AT HEART</div>
+          </div>
+          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
+            <div style="font-size:2.2rem;margin-bottom:8px;">🧚</div>
+            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Fairy Gardens</div>
+            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">MAGICAL WORLDS</div>
+          </div>
+          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
+            <div style="font-size:2.2rem;margin-bottom:8px;">🏊</div>
+            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Swimming</div>
+            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">TOTAL FISH</div>
+          </div>
+          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
+            <div style="font-size:2.2rem;margin-bottom:8px;">🧗</div>
+            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Climbing</div>
+            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">GOES STRAIGHT UP</div>
+          </div>
+          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
+            <div style="font-size:2.2rem;margin-bottom:8px;">⛷️</div>
+            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Skiing</div>
+            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">SENDS IT DOWNHILL</div>
+          </div>
+          <div style="background:#111;border:2px solid #ff3366;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;box-shadow:0 0 16px rgba(255,51,102,0.2);" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+            <div style="font-size:2.2rem;margin-bottom:8px;">❤️</div>
+            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ff3366;">Mom &amp; Dad</div>
+            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">THE WHOLE WORLD</div>
+          </div>
+          <div style="background:#111;border:2px solid #333;border-radius:16px;padding:18px 12px;transition:border-color 0.2s,transform 0.15s;" onmouseover="this.style.borderColor='#ffdc32';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#333';this.style.transform='translateY(0)'">
+            <div style="font-size:2.2rem;margin-bottom:8px;">🎸</div>
+            <div style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:2px;color:#ffdc32;">Guitar</div>
+            <div style="font-size:0.78rem;color:#666;margin-top:4px;font-weight:800;">LEARNING NOW!</div>
+          </div>
+        </div>
+        <p style="margin-top:22px;font-family:'Bebas Neue',cursive;font-size:1.1rem;letter-spacing:4px;color:#555;">Age 6 &nbsp;·&nbsp; Long Beach, CA &nbsp;·&nbsp; Rising Star</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🌟</div>
+        <h2>Fun Star Facts</h2>
+        <ul>
+          <li>Music changes your mood</li>
+          <li>There are 7 musical notes</li>
+          <li>Singing is exercise</li>
+          <li>Every culture has music</li>
+        </ul>
+      </div>
+
+      <!-- Imagine Dragons -->
+      <div class="card" style="grid-column:1/-1;background:#00080f;border:2px solid #00cfff;box-shadow:0 0 40px rgba(0,207,255,0.25);border-radius:20px;padding:28px;text-align:center;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(135deg,rgba(0,207,255,0.03) 0px,rgba(0,207,255,0.03) 1px,transparent 1px,transparent 14px);pointer-events:none;"></div>
+        <h2 style="font-family:'Bebas Neue',cursive;font-size:2rem;letter-spacing:3px;color:#00cfff;text-shadow:0 0 24px rgba(0,207,255,0.8);margin-bottom:6px;position:relative;">⚡ &nbsp; Imagine Dragons &nbsp; ⚡</h2>
+        <p style="color:#66dfff;font-weight:800;letter-spacing:2px;font-size:0.9rem;margin-bottom:18px;position:relative;">THUNDER · BELIEVER · ENEMY · ON TOP OF THE WORLD</p>
+        <div style="font-size:3rem;margin-bottom:16px;animation:iconBounce 1.4s ease-in-out infinite alternate;position:relative;">⚡</div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;position:relative;">
+          <span style="font-weight:800;font-size:1rem;padding:8px 18px;border-radius:999px;border:2px solid #00cfff;color:#fff;background:rgba(0,207,255,0.15);">⚡ Thunder</span>
+          <span style="font-weight:800;font-size:1rem;padding:8px 18px;border-radius:999px;border:2px solid #00cfff;color:#fff;background:rgba(0,207,255,0.15);">🥊 Believer</span>
+          <span style="font-weight:800;font-size:1rem;padding:8px 18px;border-radius:999px;border:2px solid #00cfff;color:#fff;background:rgba(0,207,255,0.15);">👾 Enemy</span>
+          <span style="font-weight:800;font-size:1rem;padding:8px 18px;border-radius:999px;border:2px solid #00cfff;color:#fff;background:rgba(0,207,255,0.15);">🌍 On Top of the World</span>
+        </div>
+      </div>
+
+      <!-- Moana -->
+      <div class="card" style="grid-column:1/-1;background:#00100f;border:2px solid #00d4aa;box-shadow:0 0 40px rgba(0,212,170,0.25);border-radius:20px;padding:28px;text-align:center;position:relative;overflow:hidden;">
+        <div style="position:absolute;bottom:0;left:0;width:100%;height:60px;background:linear-gradient(180deg,transparent,rgba(0,212,170,0.07));pointer-events:none;"></div>
+        <h2 style="font-family:'Bebas Neue',cursive;font-size:2rem;letter-spacing:3px;color:#00d4aa;text-shadow:0 0 24px rgba(0,212,170,0.8);margin-bottom:6px;position:relative;">🌊 &nbsp; Moana &nbsp; 🌊</h2>
+        <p style="color:#66e8d0;font-weight:800;letter-spacing:2px;font-size:0.9rem;margin-bottom:18px;position:relative;">HOW FAR I'LL GO · SHINY · YOU'RE WELCOME</p>
+        <div style="font-size:3rem;margin-bottom:16px;animation:iconBounce 1.4s ease-in-out infinite alternate;position:relative;">🌺</div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;position:relative;">
+          <span style="font-weight:800;font-size:1rem;padding:8px 18px;border-radius:999px;border:2px solid #00d4aa;color:#fff;background:rgba(0,212,170,0.15);">🌊 How Far I'll Go</span>
+          <span style="font-weight:800;font-size:1rem;padding:8px 18px;border-radius:999px;border:2px solid #00d4aa;color:#fff;background:rgba(0,212,170,0.15);">✨ Shiny</span>
+          <span style="font-weight:800;font-size:1rem;padding:8px 18px;border-radius:999px;border:2px solid #00d4aa;color:#fff;background:rgba(0,212,170,0.15);">😎 You're Welcome</span>
+          <span style="font-weight:800;font-size:1rem;padding:8px 18px;border-radius:999px;border:2px solid #00d4aa;color:#fff;background:rgba(0,212,170,0.15);">🐠 Tamatoa</span>
+        </div>
+      </div>
+
+      <!-- RIO coming soon -->
+      <div class="card" style="grid-column:1/-1;background:linear-gradient(135deg,#0f0800,#0a1000,#0f0800);border:3px solid #ffdc32;box-shadow:0 0 50px rgba(255,100,0,0.3),0 0 20px rgba(0,200,80,0.2);border-radius:20px;padding:28px;text-align:center;position:relative;overflow:hidden;animation:showGlow 2.5s ease-in-out infinite alternate;">
+        <div style="position:absolute;top:8px;right:16px;font-family:'Bebas Neue',cursive;font-size:0.85rem;letter-spacing:3px;color:#ff6b00;border:2px solid #ff6b00;padding:3px 10px;border-radius:999px;">COMING SOON</div>
+        <h2 style="font-family:'Bebas Neue',cursive;font-size:2rem;letter-spacing:3px;color:#ffdc32;text-shadow:0 0 24px rgba(255,100,0,0.9);margin-bottom:6px;position:relative;">🦜 &nbsp; RIO &nbsp; 🦜</h2>
+        <p style="color:#ffa040;font-weight:800;letter-spacing:2px;font-size:0.9rem;margin-bottom:18px;position:relative;">THE NEW MOVIE · BRAZIL · CAN'T WAIT!</p>
+        <div style="font-size:3rem;margin-bottom:16px;animation:iconBounce 1.4s ease-in-out infinite alternate;position:relative;">🎉</div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;position:relative;">
+          <span style="font-weight:800;font-size:1rem;padding:8px 18px;border-radius:999px;border:2px solid #ffdc32;color:#fff;background:rgba(255,220,50,0.15);">🦜 Blu</span>
+          <span style="font-weight:800;font-size:1rem;padding:8px 18px;border-radius:999px;border:2px solid #ffdc32;color:#fff;background:rgba(255,220,50,0.15);">🌴 Rio de Janeiro</span>
+          <span style="font-weight:800;font-size:1rem;padding:8px 18px;border-radius:999px;border:2px solid #ffdc32;color:#fff;background:rgba(255,220,50,0.15);">🎶 So Excited!</span>
+        </div>
+      </div>
+
+      <!-- Favorites -->
+      <div class="card faves-card">
+        <h2>✦ &nbsp; Eleanor's Favorites &nbsp; ✦</h2>
+        <span class="fave-pill">🤘 Metallica</span>
+        <span class="fave-pill">🎧 A Tribe Called Quest</span>
+        <span class="fave-pill">🦁 The Lion King</span>
+        <span class="fave-pill">⚡ Imagine Dragons</span>
+        <span class="fave-pill">🌊 Moana</span>
+        <span class="fave-pill">🦜 RIO</span>
+      </div>
+
+    </div>
+
+    <!-- My People -->
+    <div style="text-align:center;margin-bottom:28px;">
+      <p style="font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:6px;color:#ffdc32;margin-bottom:18px;">❤️ &nbsp; My People &nbsp; ❤️</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
+        <div style="background:#111;border:2px solid #ff3366;border-radius:20px;padding:16px 28px;box-shadow:0 0 20px rgba(255,51,102,0.15);transition:transform 0.15s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 0 30px rgba(255,51,102,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 20px rgba(255,51,102,0.15)'">
+          <div style="font-size:1.6rem;margin-bottom:6px;">🏠</div>
+          <div style="font-family:'Bebas Neue',cursive;font-size:1.2rem;letter-spacing:3px;color:#fff;">The Tolboes</div>
+          <div style="font-size:0.72rem;font-weight:800;letter-spacing:2px;color:#ff3366;margin-top:3px;">HOME BASE</div>
+        </div>
+        <div style="background:#111;border:2px solid #ffdc32;border-radius:20px;padding:16px 28px;box-shadow:0 0 20px rgba(255,220,50,0.15);transition:transform 0.15s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 0 30px rgba(255,220,50,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 20px rgba(255,220,50,0.15)'">
+          <div style="font-size:1.6rem;margin-bottom:6px;">⭐</div>
+          <div style="font-family:'Bebas Neue',cursive;font-size:1.2rem;letter-spacing:3px;color:#fff;">The Harris</div>
+          <div style="font-size:0.72rem;font-weight:800;letter-spacing:2px;color:#ffdc32;margin-top:3px;">FAMILY LOVE</div>
+        </div>
+        <div style="background:#111;border:2px solid #00cfff;border-radius:20px;padding:16px 28px;box-shadow:0 0 20px rgba(0,207,255,0.15);transition:transform 0.15s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 0 30px rgba(0,207,255,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 20px rgba(0,207,255,0.15)'">
+          <div style="font-size:1.6rem;margin-bottom:6px;">💙</div>
+          <div style="font-family:'Bebas Neue',cursive;font-size:1.2rem;letter-spacing:3px;color:#fff;">The Neumans</div>
+          <div style="font-size:0.72rem;font-weight:800;letter-spacing:2px;color:#00cfff;margin-top:3px;">FAMILY LOVE</div>
+        </div>
+        <div style="background:#111;border:2px solid #00d4aa;border-radius:20px;padding:16px 28px;box-shadow:0 0 20px rgba(0,212,170,0.15);transition:transform 0.15s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 0 30px rgba(0,212,170,0.35)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 20px rgba(0,212,170,0.15)'">
+          <div style="font-size:1.6rem;margin-bottom:6px;">🌿</div>
+          <div style="font-family:'Bebas Neue',cursive;font-size:1.2rem;letter-spacing:3px;color:#fff;">The Stewarts</div>
+          <div style="font-size:0.72rem;font-weight:800;letter-spacing:2px;color:#00d4aa;margin-top:3px;">FAMILY LOVE</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="mic-drop">
+      <p>Made with <span>♥</span> by <span>Eleanor Tolboe</span></p>
+      <p style="margin-top:10px;color:#333;font-size:0.85rem;letter-spacing:1px;">And supported by the most awesome mom 🌟</p>
+    </div>
+
+  </div>
+
+  <script>
+    // Countdown to May 21 2026 7:00 PM (showtime!)
+    const showDate = new Date('2026-05-21T19:00:00');
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = showDate - now;
+
+      if (diff <= 0) {
+        document.querySelector('.countdown-wrap').innerHTML =
+          '<div class="countdown-label" style="font-size:1.6rem;color:#ff3366;text-shadow:0 0 30px rgba(255,51,102,0.8);">🎉 SHOWTIME! BREAK A LEG ELEANOR! 🎉</div>';
+        return;
+      }
+
+      const days  = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins  = Math.floor((diff % 3600000)  / 60000);
+      const secs  = Math.floor((diff % 60000)    / 1000);
+
+      document.getElementById('cd-days').textContent  = days;
+      document.getElementById('cd-hours').textContent = pad(hours);
+      document.getElementById('cd-mins').textContent  = pad(mins);
+      document.getElementById('cd-secs').textContent  = pad(secs);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ── Easter egg: type K-Y-L-E ──────────────────────────────────────────
+    (function() {
+      const code = 'kyle';
+      let typed = '';
+
+      document.addEventListener('keydown', e => {
+        typed += e.key.toLowerCase();
+        if (typed.length > code.length) typed = typed.slice(-code.length);
+        if (typed !== code) return;
+        typed = '';
+
+        // Overlay
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+          position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.88);
+          display:flex;flex-direction:column;align-items:center;justify-content:center;
+          animation:fadeInOverlay 0.3s ease;cursor:pointer;
+        `;
+
+        overlay.innerHTML = `
+          <div style="text-align:center;padding:40px;max-width:520px;">
+            <div style="font-size:4rem;margin-bottom:16px;animation:iconBounce 1s ease-in-out infinite alternate;">🎭</div>
+            <div style="font-family:'Bebas Neue',cursive;font-size:3rem;letter-spacing:6px;color:#ffdc32;
+                        text-shadow:0 0 40px rgba(255,220,50,0.8);margin-bottom:12px;">
+              KYLE!
+            </div>
+            <div style="font-family:'Bebas Neue',cursive;font-size:1.3rem;letter-spacing:4px;color:#fff;margin-bottom:20px;">
+              THE LEGEND BEHIND THE CURTAIN
+            </div>
+            <div style="font-size:1rem;color:#aaa;line-height:1.8;margin-bottom:28px;">
+              The Kids Theatre Company of Long Beach.<br>
+              Making kids like Eleanor believe they can own a stage.<br>
+              <span style="color:#ffdc32;font-weight:800;">Thank you, Kyle. 🌟</span>
+            </div>
+            <div style="font-size:0.75rem;letter-spacing:3px;color:#444;text-transform:uppercase;">
+              tap anywhere to close
+            </div>
+          </div>
+        `;
+
+        const style = document.createElement('style');
+        style.textContent = `@keyframes fadeInOverlay { from { opacity:0; } to { opacity:1; } }`;
+        document.head.appendChild(style);
+
+        overlay.addEventListener('click', () => {
+          overlay.style.transition = 'opacity 0.3s';
+          overlay.style.opacity = '0';
+          setTimeout(() => overlay.remove(), 300);
+        });
+
+        document.body.appendChild(overlay);
+      });
+    })();
+
+    // Photo gallery — add filenames to this list as photos arrive
+    const photos = [
+      'img/photo1.jpg',
+      'img/photo2.jpg',
+      'img/photo3.jpg',
+      'img/photo4.jpg',
+    ];
+    const gallery = document.getElementById('photo-gallery');
+    if (photos.length) {
+      photos.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.cssText = 'width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px;border:2px solid #333;transition:transform 0.2s,border-color 0.2s;cursor:pointer;';
+        img.onmouseover = () => { img.style.transform='scale(1.04)'; img.style.borderColor='#ffdc32'; };
+        img.onmouseout  = () => { img.style.transform='scale(1)';    img.style.borderColor='#333'; };
+        gallery.appendChild(img);
+      });
+    } else {
+      gallery.style.display = 'none';
+    }
+
+    // Confetti
+    const colors = ['#ffdc32','#ff3366','#00cfff','#7c3aed','#ff6b00','#fff'];
+    for (let i = 0; i < 40; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.cssText = `
+        left: ${Math.random()*100}vw;
+        background: ${colors[Math.floor(Math.random()*colors.length)]};
+        width: ${6 + Math.random()*8}px;
+        height: ${6 + Math.random()*8}px;
+        border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+        animation-duration: ${6 + Math.random()*10}s;
+        animation-delay: ${Math.random()*10}s;
+        opacity: ${0.4 + Math.random()*0.6};
+      `;
+      document.body.appendChild(c);
+    }
+  </script>
+
+</body>
+</html>
